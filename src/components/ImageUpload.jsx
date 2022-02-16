@@ -11,8 +11,7 @@ const ImageContainer = styled.div((props) => ({
   width: "100px",
   height: "100px",
   borderRadius: "50%",
-  marginTop: "30px",
-  marginBottom: "8px",
+  margin: "30px auto 8px auto",
   border: "4px solid lightgray",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -21,7 +20,8 @@ const ImageContainer = styled.div((props) => ({
 }));
 
 const SmallTextButton = styled.p({
-  fontSize: "0.8em",
+  fontSize: "0.9em",
+  fontWeight: "600",
   cursor: "pointer",
 });
 
@@ -57,7 +57,7 @@ const ImageUpload = ({ avatar, setAvatar }) => {
   };
 
   return (
-    <Container textAlign="center">
+    <Container textAlign="center" marginTop="0px" marginLeft="200px">
       <p css={labelStyles}>IMAGE</p>
       <ImageContainer avatar={avatar} onClick={handleUpload}>
         <Badge />
