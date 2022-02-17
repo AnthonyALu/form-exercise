@@ -13,7 +13,6 @@ const slideDown = keyframes`
    transform: translate3d(0, 100px, 0);
  }
 
-
 `;
 
 const ToastContainer = styled.div((props) => ({
@@ -41,7 +40,7 @@ const ImageContainer = styled.div((props) => ({
   backgroundImage: `url(${Tick})`,
 }));
 
-const Toast = ({ animate, setAnimate }) => {
+const Toast = ({ animate, setAnimate, text }) => {
   return (
     <ToastContainer
       bgColor="#287664"
@@ -49,7 +48,7 @@ const Toast = ({ animate, setAnimate }) => {
       onAnimationEnd={() => setAnimate(false)}
     >
       <ImageContainer img={Tick} />
-      <p>Changes have been saved successfully</p>
+      {text}
     </ToastContainer>
   );
 };

@@ -8,7 +8,11 @@ function App() {
   const [toastAnimate, setToastAnimate] = useState(false);
   return (
     <div css={bgStyles}>
-      <Toast animate={toastAnimate} setAnimate={setToastAnimate} />
+      <Toast
+        animate={toastAnimate}
+        setAnimate={setToastAnimate}
+        text="Changes have been saved successfully"
+      />
       <Form setToastAnimate={setToastAnimate} />
     </div>
   );
