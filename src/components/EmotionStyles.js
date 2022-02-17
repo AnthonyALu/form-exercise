@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const bgStyles = css`
@@ -19,12 +19,6 @@ export const formStyles = css`
   color: white;
 `;
 
-export const inputFieldHover = css`
-  &:hover {
-    border: 1px solid white;
-  }
-`;
-
 export const FlexContainer = styled.div((props) => ({
   display: "flex",
   flexDirection: props.direction ? props.direction : "row",
@@ -38,16 +32,19 @@ export const Container = styled.div`
   text-align: ${(props) => props.textAlign || "left"};
 `;
 
-export const InputContainer = styled.input((props) => ({
-  margin: "4px auto auto auto",
-  padding: "12px",
-  backgroundColor: "#2a2e35",
-  border: props.focus
-    ? "1px solid #27987b"
-    : props.valid
-    ? "1px solid gray"
-    : "1px solid #c52735",
-  borderRadius: "5px",
-  color: props.focus ? "white" : "#a8afb6",
-  width: "100%",
+export const Button = styled.button((props) => ({
+  backgroundImage: props.gradient,
+  backgroundColor: props.bgColor,
+  backgroundPosition: props.bgPosition,
+  padding: "12px 20px",
+  borderRadius: "6px",
+  cursor: "pointer",
+  fontWeight: "600",
+  color: "white",
+  marginTop: "20px",
+  marginRight: "10px",
+  ":hover": {
+    backgroundColor: props.hoverColor,
+    backgroundImage: props.hoverGradient,
+  },
 }));

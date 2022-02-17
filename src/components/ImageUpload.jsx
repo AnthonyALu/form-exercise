@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Container } from "./EmotionStyles";
 import { labelStyles } from "./EmotionStyles";
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import avatar from "../common/avatar.png";
+import Avatar from "../common/avatar.png";
 import { css } from "@emotion/react";
 
 const ImageContainer = styled.div((props) => ({
@@ -16,7 +16,7 @@ const ImageContainer = styled.div((props) => ({
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
-  backgroundImage: props.avatar ? `url(${props.avatar})` : `url(${avatar})`,
+  backgroundImage: props.avatar ? `url(${props.avatar})` : `url(${Avatar})`,
 }));
 
 const SmallTextButton = styled.p({
@@ -45,6 +45,7 @@ const ImageUpload = ({ avatar, setAvatar }) => {
     hiddenFileInput.current.click();
   };
 
+  //remove avatar
   const handleRemove = (e) => {
     setAvatar(null);
   };
@@ -57,7 +58,13 @@ const ImageUpload = ({ avatar, setAvatar }) => {
   };
 
   return (
-    <Container textAlign="center" marginTop="0px" marginLeft="200px">
+    <Container
+      textAlign="center"
+      marginTop="0px"
+      css={css`
+        flex-shrink: 1;
+      `}
+    >
       <p css={labelStyles}>IMAGE</p>
       <ImageContainer avatar={avatar} onClick={handleUpload}>
         <Badge />
