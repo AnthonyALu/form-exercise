@@ -62,6 +62,7 @@ const ImageUpload = ({ avatar, setAvatar }) => {
   };
 
   const validateImage = (file) => {
+    // Validate file is of type Image
     let fileType = file.type.split("/")[0];
     if (fileType !== "image") {
       console.log("Not an image file");
@@ -71,6 +72,7 @@ const ImageUpload = ({ avatar, setAvatar }) => {
   };
 
   const changeHandler = (e) => {
+    e.preventDefault();
     validateImage(e.target.files[0]);
   };
 
@@ -85,8 +87,11 @@ const ImageUpload = ({ avatar, setAvatar }) => {
     e.preventDefault();
     let file = e.dataTransfer.files[0];
     validateImage(file);
+  };
 
-    // Validate file is of type Image
+  const dropZoneClick = (e) => {
+    //prevents normal image upload functionality
+    e.preventDefault();
   };
 
   return (
@@ -100,7 +105,7 @@ const ImageUpload = ({ avatar, setAvatar }) => {
       <p css={labelStyles}>IMAGE</p>
       <ImageContainer avatar={avatar}>
         <Badge />
-        <DropZone type="file" onDrop={handleDrop} />
+        <DropZone type="file" onClick={dropZoneClick} onDrop={handleDrop} />
       </ImageContainer>
       {avatar === null ? (
         <>
