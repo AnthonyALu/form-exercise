@@ -36,13 +36,24 @@ const Badge = styled.div({
   backgroundSize: "cover",
 });
 
+const DropZone = styled.input({
+  position: "relative",
+  top: "-30px",
+  borderRadius: "50%",
+  width: "100%",
+  height: "100%",
+  opacity: "0",
+});
+
 const ImageUpload = ({ avatar, setAvatar }) => {
   // Create a reference to the hidden file input element
   const hiddenFileInput = React.useRef(null);
 
   // Programatically click the hidden file input element when the Button component is clicked
   const handleUpload = (e) => {
-    hiddenFileInput.current.click();
+    if (avatar === null) {
+      hiddenFileInput.current.click();
+    }
   };
 
   //remove avatar
@@ -50,11 +61,32 @@ const ImageUpload = ({ avatar, setAvatar }) => {
     setAvatar(null);
   };
 
+  const validateImage = (file) => {
+    let fileType = file.type.split("/")[0];
+    if (fileType !== "image") {
+      console.log("Not an image file");
+    } else {
+      imageUpload(file);
+    }
+  };
+
   const changeHandler = (e) => {
+    validateImage(e.target.files[0]);
+  };
+
+  const imageUpload = (file) => {
     //create a temporary URL for the uploaded image
-    const fileUploaded = URL.createObjectURL(e.target.files[0]);
+    const blobFile = URL.createObjectURL(file);
     //set image url as the avatar
-    setAvatar(fileUploaded);
+    setAvatar(blobFile);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    let file = e.dataTransfer.files[0];
+    validateImage(file);
+
+    // Validate file is of type Image
   };
 
   return (
@@ -66,8 +98,9 @@ const ImageUpload = ({ avatar, setAvatar }) => {
       `}
     >
       <p css={labelStyles}>IMAGE</p>
-      <ImageContainer avatar={avatar} onClick={handleUpload}>
+      <ImageContainer avatar={avatar}>
         <Badge />
+        <DropZone type="file" onDrop={handleDrop} />
       </ImageContainer>
       {avatar === null ? (
         <>
